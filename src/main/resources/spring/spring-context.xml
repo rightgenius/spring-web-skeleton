@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context 
+				http://www.springframework.org/schema/context/spring-context.xsd
+				http://www.springframework.org/schema/task
+				http://www.springframework.org/schema/task/spring-task.xsd
+				http://www.springframework.org/schema/util 
+				http://www.springframework.org/schema/util/spring-util.xsd
+				http://www.springframework.org/schema/tx
+				http://www.springframework.org/schema/tx/spring-tx.xsd
+				http://www.springframework.org/schema/mvc
+				http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+				>
+	<context:annotation-config />
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:/settings.properties"/>
+	
+	<!-- Initialize first as defined first -->
+	<context:component-scan base-package="com.web" />
+	
+	<import resource="jpa-context.xml"/>
+	
+	<!-- web mvc -->
+	<mvc:annotation-driven/>
+	<!-- 使用默认的Servlet来响应静态文件。 -->
+	<mvc:default-servlet-handler/>
+	
+	
+	<!-- JSP --> 
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/views/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<mvc:resources mapping="/**" location="/views/" />
+	
+	<!-- json -->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"> 
+      <property name="order" value="1" />  
+       <property name="defaultViews">  
+        <list>    
+            <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />  
+        </list>  
+       </property>   
+      <property name="defaultContentType" value="text/html" />  
+      <property name="mediaTypes"> 
+        <map> 
+          <entry key="json" value="application/json" />    
+        </map> 
+      </property> 
+      <property name="ignoreAcceptHeader" value="true" />    
+  </bean> 
+
+</beans>
