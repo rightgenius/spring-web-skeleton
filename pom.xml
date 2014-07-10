@@ -156,7 +156,7 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.1.0.M0</version>
+				<version>9.2.0.M1</version>
 				<configuration>
 					<jvmArgs>-XX:PermSize=256M -XX:MaxPermSize=512M</jvmArgs>
 					<stopKey>STOP</stopKey>

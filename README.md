@@ -34,7 +34,7 @@ Backend database is Mysql.
 
 2. do ```mvn install```, this will execute test and run the spring framework, thus updating the database schema and insert some fake data.
 
-3. do ```mvn jetty:run``, this will run a jetty server, so can visit it at "http://localhost:8080". Some test urls:
+3. do ```mvn jetty:run```, this will run a jetty server, so can visit it at "http://localhost:8080". Some test urls:
 	- http://localhost:8080/
 	- http://localhost:8080/user
 	- http://localhost:8080/ajax/1
@@ -48,3 +48,5 @@ Backend database is Mysql.
 3. Modify ```src/main/jpa-context.xml```, adapt ```packagesToScan``` in ```<bean id="entityManagerFactory">```, and ```base-package``` in ```<jpa:repositories>```
 
 4. Modify ```pom.xml```, for groupId, artifactId, name, url, finalName, etc.
+
+5. Also you should modify ```src/main/webapp/WEB-INF/web.xml``` to make the package name complies (you can find all ```com.web``` and replace them).

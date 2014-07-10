@@ -4,18 +4,30 @@
 	                         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 
-	<!-- 区分项目名称，防止默认重名 -->
+	<!-- Prevent name conflicts -->
 	<context-param>
 		<param-name>webAppRootKey</param-name>
 		<param-value>com.web</param-value>
 	</context-param>
 
-	<!-- Spring的log4j监听器 -->
+	<!-- Spring log4j listener -->
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
+	
+	<!-- prevent classloader memory leaks -->
+	<listener>
+		<listener-class>com.web.jee.AppContextProtectionListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.web.jee.JdbcDriverUnregisteringListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.web.jee.ProxoolShutdownListener</listener-class>
+	</listener>
+	
 
-	<!-- 字符集 过滤器 -->
+	<!-- charset utf8 -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
